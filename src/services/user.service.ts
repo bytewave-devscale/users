@@ -4,8 +4,12 @@ import bcrypt from "bcrypt";
 const userService = {
   getAll: async () => {
     const allUsers = await userRepository.getAll();
+
     if (!allUsers) throw new Error("users db is empty");
+
+    return allUsers;
   },
+
   getOne: async (userdata: { id?: string; email?: string }) => {
     const user = await userRepository.getOne(userdata);
 
@@ -13,12 +17,14 @@ const userService = {
 
     return user;
   },
+
   create: async (userdata: {
     username: string;
     email: string;
     password: string;
   }) => {
     const { username, email, password } = userdata;
+
     // input validation
     if (!username) throw new Error("username must be provided");
     if (!email) throw new Error("email must be provided");
