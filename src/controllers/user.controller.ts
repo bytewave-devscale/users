@@ -17,6 +17,45 @@ const userController = {
       }
     }
   },
+
+  handleCreate: async (req: Request, res: Response) => {
+    try {
+      const newUser = await userService.create(req.body);
+      return res
+        .status(201)
+        .json({ message: "user created successfully", user: newUser });
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      }
+    }
+  },
+
+  handleUpdate: async (req: Request, res: Response) => {
+    try {
+      const updatedUser = await userService.update(req.params.id, req.body);
+      return res
+        .status(201)
+        .json({ message: "user updated successfully", user: updatedUser });
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      }
+    }
+  },
+
+  handleDelete: async (req: Request, res: Response) => {
+    try {
+      const deletedUser = await userService.delete(req.params.id);
+      return res
+        .status(201)
+        .json({ message: "user deleted successfully", user: deletedUser });
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      }
+    }
+  },
 };
 
 export default userController;

@@ -50,6 +50,7 @@ const userService = {
 
     return newUser;
   },
+  
   update: async (
     id: string,
     userdata: { username?: string; email?: string; password?: string }

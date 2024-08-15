@@ -1,9 +1,37 @@
+@host = http://localhost:8000
+
+
 ### test
-GET http://localhost:8000/
+GET {{host}}/
+
 
 ### get all users
-GET http://localhost:8000/api/v1/user/all
+GET {{host}}/api/v1/user/all
 
 
 ### get one user
-GET http://localhost:8000/api/v1/user/1245
+GET {{host}}/api/v1/user/1245
+
+
+### create a user
+POST {{host}}/api/v1/user 
+Content-Type: application/json
+
+{
+    "username":"Wahyu",
+    "email":"w@mail.com",
+    "password":"rahasia123"
+}
+
+
+### update a user
+PATCH {{host}}/api/v1/user/66bd914f7340ba582f5c8c43 
+Content-Type: application/json
+
+{
+    "username":"Wahyu"
+}
+
+
+### delete a user
+DELETE {{host}}/api/v1/user/66bd914f7340ba582f5c8c43
