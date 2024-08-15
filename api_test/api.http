@@ -2,4 +2,8 @@
 GET http://localhost:8000/
 
 ### get all users
-GET http://localhost:8000/api/v1/user
+GET http://localhost:8000/api/v1/user/all
+
+
+### get one user
+GET http://localhost:8000/api/v1/user/1245

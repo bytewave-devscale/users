@@ -3,7 +3,7 @@ import userController from "../controllers/user.controller";
 
 const userRouter = Router();
 
-userRouter.get("/all", (req, res) => res.json({ msg: "hai" })); //get all user in db
-userRouter.get("/", userController.handleGetSelf); //get logged in user data
+userRouter.get("/all", userController.handleGetAll);
+userRouter.get("/:id", userController.handleGetOne);
 
 export default userRouter;

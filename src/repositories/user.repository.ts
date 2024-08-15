@@ -12,7 +12,6 @@ const userModel = mongoose.model("User", userSchema);
 // basic db interaction
 const userRepository = {
   getAll: async () => {
-    console.log("user repo get all");
     return await userModel.find();
   },
   getOne: async (userdata: {
