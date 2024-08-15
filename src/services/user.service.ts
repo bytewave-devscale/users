@@ -11,7 +11,7 @@ const userService = {
   },
 
   getOne: async (userdata: { id?: string; email?: string }) => {
-    const user = await userRepository.getOne(userdata);
+    const user = await userRepository.getOne({ _id: userdata.id });
 
     if (!user) throw new Error("no user found");
 
@@ -50,7 +50,7 @@ const userService = {
 
     return newUser;
   },
-  
+
   update: async (
     id: string,
     userdata: { username?: string; email?: string; password?: string }
