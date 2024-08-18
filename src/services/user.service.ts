@@ -11,7 +11,11 @@ const userService = {
   },
 
   getOne: async (userdata: { id?: string; email?: string }) => {
-    const user = await userRepository.getOne({ _id: userdata.id });
+    const {id, email} = userdata;
+
+    const filter:{_id?:string, email?:string} = id ? {_id:id} : {email}
+
+    const user = await userRepository.getOne(filter);
 
     if (!user) throw new Error("no user found");
 

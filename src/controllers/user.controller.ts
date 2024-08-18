@@ -18,6 +18,17 @@ const userController = {
     }
   },
 
+  handleGetOneByEmail: async (req: Request, res: Response) => {
+    try {
+      const user = await userService.getOne({ email: req.params.email });
+      return res.status(200).json({ user });
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(404).json({ error: error.message });
+      }
+    }
+  },
+
   handleCreate: async (req: Request, res: Response) => {
     try {
       const newUser = await userService.create(req.body);
