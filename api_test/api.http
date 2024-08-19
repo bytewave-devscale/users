@@ -15,7 +15,7 @@ GET {{host}}/api/v1/user/66c072889121a44cc12bb58d
 
 
 ### get one user by email
-GET {{host}}/api/v1/user/email/r@mail.com
+GET {{host}}/api/v1/user/email/mymail
 
 
 ### create a user
