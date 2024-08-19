@@ -1,5 +1,5 @@
-@host = http://localhost:8000
-# @host = http://103.82.92.117:8000
+# @host = http://localhost:8010
+@host = http://103.82.92.117:8010
 
 
 ### test
