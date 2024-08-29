@@ -1,6 +1,6 @@
 // db model
 import mongoose from "mongoose";
-import { UserInterface, UserUpdateInterface } from "../../types/entity";
+import { UserInterface, UserUpdateInterface } from "../types/entity";
 
 const userSchema = new mongoose.Schema({
   username: String,
