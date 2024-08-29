@@ -2,14 +2,16 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRouter from "./routes/user.route";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-app.use("/api/v1/user", userRouter);
 
+app.use("/api/v1/user", userRouter);
+app.use(cors());
 app.get("/", (_, res) => {
   res.send("user service - bytewaveForum");
 });
