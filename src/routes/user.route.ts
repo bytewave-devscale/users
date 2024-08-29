@@ -1,16 +1,17 @@
 import { Router } from "express";
 import userController from "../controllers/user.controller";
+import { authMiddleware } from "../../auth.midlleware";
 
 const userRouter = Router();
 
-userRouter.get("/all", userController.handleGetAll);
+userRouter.get("/", userController.handleGetAll);
 userRouter.get("/email/:email", userController.handleGetOneByEmail);
 userRouter.get("/:id", userController.handleGetOne);
 
 userRouter.post("/", userController.handleCreate);
 
-userRouter.patch("/:id", userController.handleUpdate);
+userRouter.patch("/:id", authMiddleware, userController.handleUpdate);
 
-userRouter.delete("/:id", userController.handleDelete);
+userRouter.delete("/:id", authMiddleware, userController.handleDelete);
 
 export default userRouter;

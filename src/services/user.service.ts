@@ -1,23 +1,24 @@
-import userRepository from "../repositories/user.repository";
+import * as userRepository from "../repositories/user.repository";
 import bcrypt from "bcrypt";
 
 const userService = {
   getAll: async () => {
-    const allUsers = await userRepository.getAll();
-
-    if (!allUsers) throw new Error("users db is empty");
-
+    const allUsers = await userRepository.getUsers({});
     return allUsers;
   },
 
-  getOne: async (userdata: { id?: string; email?: string }) => {
-    const {id, email} = userdata;
+  getUserbyId: async (_id: string) => {
+    const user = await userRepository.getUsers({ _id });
 
-    const filter:{_id?:string, email?:string} = id ? {_id:id} : {email}
+    if (!user) throw new Error("user not found");
 
-    const user = await userRepository.getOne(filter);
+    return user;
+  },
 
-    if (!user) throw new Error("no user found");
+  getUserbyEmail: async (email: string) => {
+    const user = await userRepository.getUsers({ email });
+
+    if (!user) throw new Error("user not found");
 
     return user;
   },
@@ -37,7 +38,7 @@ const userService = {
       throw new Error("password must be at least 8 characters");
 
     // collision check
-    const existingUser = await userRepository.getOne({ email });
+    const existingUser = await userRepository.getUsers({ email });
     if (existingUser) throw new Error("email already registered");
 
     // hash password
@@ -46,7 +47,7 @@ const userService = {
       Number(process.env.BCRYPT_ROUND as string)
     );
 
-    const newUser = await userRepository.create({
+    const newUser = await userRepository.createUser({
       username,
       email,
       password: hashedPassword,
@@ -56,10 +57,10 @@ const userService = {
   },
 
   update: async (
-    id: string,
-    userdata: { username?: string; email?: string; password?: string }
+    _id: string,
+    updateData: { username?: string; email?: string; password?: string }
   ) => {
-    const { password } = userdata;
+    const { password } = updateData;
 
     // if updated data is the password, hash it
     if (password) {
@@ -67,15 +68,15 @@ const userService = {
         password,
         Number(process.env.BCRYPT_ROUND as string)
       );
-      userdata.password = hashedPassword;
+      updateData.password = hashedPassword;
     }
 
-    const updatedUser = await userRepository.update(id, userdata);
+    const updatedUser = await userRepository.updateUser({ _id, updateData });
 
     return updatedUser;
   },
-  delete: async (id: string) => {
-    const deletedUser = await userRepository.delete(id);
+  delete: async (_id: string) => {
+    const deletedUser = await userRepository.deleteUser(_id);
     return deletedUser;
   },
 };
