@@ -1,5 +1,5 @@
-# @host = http://localhost:8010
-@host = http://103.82.92.117:8010
+@host = http://localhost:8000
+# @host = http://103.82.92.117:8010
 
 
 ### test
@@ -7,15 +7,15 @@ GET {{host}}/
 
 
 ### get all users
-GET {{host}}/api/v1/user/all
+GET {{host}}/api/v1/user/
 
 
 ### get one user
-GET {{host}}/api/v1/user/66c072889121a44cc12bb58d
+GET {{host}}/api/v1/user/66bd91aa9b4a712e51ab14c1
 
 
 ### get one user by email
-GET {{host}}/api/v1/user/email/mymail
+GET {{host}}/api/v1/user/email/r@mail.com
 
 
 ### create a user
@@ -24,10 +24,19 @@ Content-Type: application/json
 
 {
     "username":"didi",
-    "email":"mymail",
+    "email":"my.com",
     "password":"rahasia123"
 }
 
+
+### login
+POST http://103.82.92.117:8020/api/v1/auth/login 
+Content-Type: application/json
+
+{
+    "email":"my.com",
+    "password":"rahasia123"
+}
 
 ### update a user
 PATCH {{host}}/api/v1/user/66bd914f7340ba582f5c8c43 

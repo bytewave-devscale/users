@@ -8,7 +8,8 @@ const userService = {
   },
 
   getUserbyId: async (_id: string) => {
-    const user = await userRepository.getUsers({ _id });
+    const users = await userRepository.getUsers({ _id });
+    const user = users[0];
 
     if (!user) throw new Error("user not found");
 
@@ -16,7 +17,8 @@ const userService = {
   },
 
   getUserbyEmail: async (email: string) => {
-    const user = await userRepository.getUsers({ email });
+    const users = await userRepository.getUsers({ email });
+    const user = users[0];
 
     if (!user) throw new Error("user not found");
 
@@ -38,7 +40,8 @@ const userService = {
       throw new Error("password must be at least 8 characters");
 
     // collision check
-    const existingUser = await userRepository.getUsers({ email });
+    const users = await userRepository.getUsers({ email });
+    const existingUser = users[0];
     if (existingUser) throw new Error("email already registered");
 
     // hash password
