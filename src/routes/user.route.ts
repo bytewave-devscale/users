@@ -10,8 +10,8 @@ userRouter.get("/:id", userController.handleGetOne);
 
 userRouter.post("/", userController.handleCreate);
 
-userRouter.patch("/:id", authMiddleware, userController.handleUpdate);
+userRouter.patch("/", authMiddleware, userController.handleUpdate);
 
-userRouter.delete("/:id", authMiddleware, userController.handleDelete);
+userRouter.delete("/", authMiddleware, userController.handleDelete);
 
 export default userRouter;
